@@ -18,5 +18,15 @@ namespace GestionDesStagesTB.Shared.Policies
                 .RequireRole("Etudiant")
                 .Build();
         }
+
+        public const string EstEntreprise = "EstEntreprise";
+        public static AuthorizationPolicy EstEntreprisePolicy()
+        {
+            return new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                //.RequireClaim("Statut", "Milieu")
+                .RequireRole("Entreprise")
+                .Build();
+        }
     }
 }

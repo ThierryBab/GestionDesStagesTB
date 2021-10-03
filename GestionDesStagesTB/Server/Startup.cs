@@ -1,5 +1,7 @@
 using GestionDesStagesTB.Server.Data;
+using GestionDesStagesTB.Server.Interfaces;
 using GestionDesStagesTB.Server.Models;
+using GestionDesStagesTB.Server.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +34,10 @@ namespace GestionDesStagesTB.Server
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            
+            services.AddScoped<IStageRepository, StageRepository>();
+            services.AddScoped<IStageStatutRepository, StageStatutRepository>();
+
+
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options => {
