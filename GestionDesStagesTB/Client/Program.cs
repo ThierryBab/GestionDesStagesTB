@@ -1,3 +1,5 @@
+using GestionDesStagesTB.Client.Interfaces;
+using GestionDesStagesTB.Client.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,10 +36,16 @@ namespace GestionDesStagesTB.Client
                 authorizationOptions.AddPolicy(
                     GestionDesStagesTB.Shared.Policies.Policies.EstEtudiant,
                     GestionDesStagesTB.Shared.Policies.Policies.EstEtudiantPolicy());
+                authorizationOptions.AddPolicy(
+                    GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise,
+                    GestionDesStagesTB.Shared.Policies.Policies.EstEntreprisePolicy());
             });
 
+            //TODO: remplacer le port par une variable qui auto adapte
 
-
+            builder.Services.AddHttpClient<IStageDataService, StageDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
+            builder.Services.AddHttpClient<IStageStatutDataService, StageStatutDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
+            
             await builder.Build().RunAsync();
         }
     }
