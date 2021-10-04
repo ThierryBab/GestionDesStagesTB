@@ -37,7 +37,7 @@ namespace GestionDesStagesTB.Server
             services.AddScoped<IStageRepository, StageRepository>();
             services.AddScoped<IStageStatutRepository, StageStatutRepository>();
 
-
+            services.AddScoped<StageRepository, StageRepository>();
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options => {

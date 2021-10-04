@@ -13,6 +13,24 @@
             <input @bind-Value:event="oninput" id="Titre" class="form-control col-sm-8" @bind-Value="@Stage.Titre" placeholder="Entrer le titre du stage" />
             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.Titre)" />
         </div>
+        <div class="form-group row">
+            <label asp-for="Nom" class="col-sm-3">Nom de l'employeur':</label>
+            <input @bind-Value:event="oninput" id="Nom" class="form-control col-sm-8" @bind-Value="@Stage.Nom" placeholder="Entrer le nom de l'employeur'" />
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.Nom)" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="nomEntreprise" class="col-sm-3">Nom de l'entreprise:</label>
+            <input @bind-Value:event="oninput" id="nomEntreprise" class="form-control col-sm-8" @bind-Value="@Stage.nomEntreprise" placeholder="Entrer le nom de l'entreprise" />
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.nomEntreprise)" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Email" class="col-sm-3">Email:</label>
+            <input @bind-Value:event="oninput" id="Email" class="form-control col-sm-8" @bind-Value="@Stage.Email" placeholder="Email" />
+            <ValidationMessage asp-validation-for="Input.Email" class="offset-sm-3 col-sm-8"  For="@(() => Stage.Email)" />
+        </div>
+
 
         <div class="form-group row">
             <label asp-for="Description" class="col-sm-3">Description sommaire du stage:</label>

@@ -35,6 +35,15 @@ namespace GestionDesStagesTB.Shared.Models
         [StringLength(450)]
         public string Id { get; set; }
 
+        [StringLength(45)]
+        public string Nom { get; set; }
+
+        [StringLength(45)]
+        public string nomEntreprise { get; set; }
+
+        [StringLength(45)]
+        public string Email { get; set; }
+
         public DateTime DateCreation { get; set; }
     }
 }
