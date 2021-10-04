@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GestionDesStagesTB.Client.Pages
 {
-    public partial class Coordinateur
+    public partial class Coordonateur
     {
     }
 }

@@ -29,13 +29,13 @@ namespace GestionDesStagesTB.Shared.Policies
                 .Build();
         }
 
-        public const string EstCoordinateur = "EstCoordinateur";
-        public static AuthorizationPolicy EstCoordinateurPolicy()
+        public const string EstCoordonateur = "EstCoordonateur";
+        public static AuthorizationPolicy EstCoordonateurPolicy()
         {
             return new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 //.RequireClaim("Statut", "Milieu")
-                .RequireRole("Entreprise")
+                .RequireRole("Coordonateur")
                 .Build();
         }
     }

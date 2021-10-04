@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
     <Content Remove="wwwroot\favicon.ico" />
   </ItemGroup>
 
