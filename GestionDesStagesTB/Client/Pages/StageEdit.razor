@@ -20,7 +20,7 @@
             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.Description)" />
         </div>
 
-        @*<div class="form-group row">
+        <div class="form-group row">
             <label for="Statut" class="col-sm-3">Statut: </label>
             <InputSelect id="Statut" class="form-control col-sm-8" @bind-Value="@Stage.StageStatutId">
                 @foreach (var statut in StageStatut)
@@ -28,7 +28,7 @@
                     <option value="@statut.StageStatutId">@statut.DescriptionStatut</option>
                 }
             </InputSelect>
-        </div>*@
+        </div>
 
         <div class="form-group row">
             <label for="Salaire" class=" offset-sm-3">
