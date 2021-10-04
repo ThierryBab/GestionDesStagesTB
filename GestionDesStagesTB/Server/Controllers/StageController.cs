@@ -35,6 +35,13 @@ namespace GestionDesStagesTB.Server.Controllers
 
             return Created("stage", created);
         }
+
+        [HttpGet]
+        public IActionResult GetAllStage()
+        {
+            return Ok(_stageRepository.GetAllStages());
+        }
+
     }
 
     [Route("api/[controller]")]

@@ -9,6 +9,8 @@ namespace GestionDesStagesTB.Client.Interfaces
     public interface IStageDataService
     {
         Task<Stage> AddStage(Stage stage);
+
+        Task<IEnumerable<Stage>> GetAllStages();
     }
 
 }
