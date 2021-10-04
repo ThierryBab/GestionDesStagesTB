@@ -10,18 +10,25 @@
             <th>Titre</th>
             <th>Description</th>
             <th>Statut</th>
+            <th>Email</th>
+            <th>Nom</th>
+            <th>Nom de l'entreprise</th>
             <th>Création</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var stage in Stages)
         {
-            <tr>
-                <td>@stage.Titre</td>
-                <td>@stage.Description</td>
-                <td>@stage.StageStatut?.DescriptionStatut</td>
-                <td>@stage.DateCreation.ToString("yyyy-MM-dd")</td>
-            </tr>
+        <tr>
+            <td>@stage.Titre</td>
+            <td>@stage.Description</td>
+            <td>@stage.StageStatut?.DescriptionStatut</td>
+            <td>@stage.Email</td>
+            <td>@stage.Nom</td>
+            <td>@stage.nomEntreprise</td>
+            <td>@stage.DateCreation.ToString("yyyy-MM-dd")</td>
+        </tr>
         }
     </tbody>
 </table>
