@@ -14,7 +14,12 @@ namespace GestionDesStagesTB.Client.Pages
 
         public List<Stage> Stages { get; set; } = new List<Stage>();
 
-        
+        protected override async Task OnInitializedAsync()
+        {
+            // Appel du service pour obtenir la liste des TOUS stages actifs
+            Stages = (await StageDataService.GetAllStages()).ToList();
+        }
     }
 }
+
 

@@ -10,5 +10,7 @@ namespace GestionDesStagesTB.Server.Interfaces
     {
 
         Stage AddStage(Stage stage);
+
+        IEnumerable<Stage> GetAllStages();
     }
 }

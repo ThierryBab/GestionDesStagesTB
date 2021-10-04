@@ -33,5 +33,19 @@ namespace GestionDesStagesTB.Client.Services
 
             return null;
         }
+
+        public async Task<IEnumerable<Stage>> GetAllStages()
+        {
+            try
+            {
+                return await JsonSerializer.DeserializeAsync<IEnumerable<Stage>>
+                    (await _httpClient.GetStreamAsync("api/stage"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+            catch (Exception e)
+            {
+                // Logging ici...
+            }
+            return null;
+        }
     }
 }
