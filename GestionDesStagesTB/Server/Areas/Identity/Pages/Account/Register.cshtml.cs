@@ -63,7 +63,7 @@ namespace GestionDesStagesTB.Server.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "Je suis")]
+            [Display(Name = "Role")]
             public string Role { get; set; }
         }
 
