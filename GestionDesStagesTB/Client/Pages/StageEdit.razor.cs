@@ -49,6 +49,7 @@ namespace GestionDesStagesTB.Client.Pages
                 Stage.StageId = Guid.NewGuid();
                 // Appel du service pour sauvegarder le nouveau stage dans la base de données.
                 await StageDataService.AddStage(Stage);
+                NavigationManager.NavigateTo("/");
             }
             else
             {
