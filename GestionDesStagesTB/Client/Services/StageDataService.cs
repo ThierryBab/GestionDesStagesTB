@@ -58,5 +58,11 @@ namespace GestionDesStagesTB.Client.Services
             }
             return null;
         }
+
+        public async Task DeleteStage(Guid StageId)
+        {
+            await _httpClient.DeleteAsync($"api/stage/{StageId}");
+        }
+
     }
 }

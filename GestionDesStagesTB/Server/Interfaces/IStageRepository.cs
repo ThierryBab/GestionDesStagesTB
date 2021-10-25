@@ -14,5 +14,9 @@ namespace GestionDesStagesTB.Server.Interfaces
         IEnumerable<Stage> GetAllStages();
 
         IEnumerable<Stage> GetAllStagesById(string id);
+
+        Stage GetStageByStageId(string StageId);
+
+        void DeleteStage(Guid StageId);
     }
 }

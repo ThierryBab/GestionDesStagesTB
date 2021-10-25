@@ -38,5 +38,19 @@ namespace GestionDesStagesTB.Server.Repositories
             return _appDbContext.Stage.Include(c => c.StageStatut).Where(c => c.Id == id).OrderByDescending(t => t.DateCreation);
         }
 
+        public Stage GetStageByStageId(string StageId)
+        {
+            // Obtenir un stage précis d'une entreprise
+            return _appDbContext.Stage.Include(c => c.StageStatut).FirstOrDefault(c => c.StageId == new Guid(StageId));
+        }
+
+        public void DeleteStage(Guid StageId)
+        {
+            var foundStage = _appDbContext.Stage.FirstOrDefault(e => e.StageId == StageId);
+            if (foundStage == null) return;
+
+            _appDbContext.Stage.Remove(foundStage);
+            _appDbContext.SaveChanges();
+        }
     }
 }

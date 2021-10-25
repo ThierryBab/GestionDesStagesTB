@@ -48,6 +48,21 @@ namespace GestionDesStagesTB.Server.Controllers
             return Ok(_stageRepository.GetAllStagesById(id));
         }
 
+        [HttpDelete("{StageId}")]
+        public IActionResult DeleteStage(Guid StageId)
+        {
+            if (StageId == Guid.Empty)
+                return BadRequest();
+
+            var stageToDelete = (_stageRepository.GetStageByStageId(StageId.ToString()));
+            if (stageToDelete == null)
+                return NotFound();
+
+            _stageRepository.DeleteStage(StageId);
+
+            return NoContent();//success
+        }
+
     }
 
     [Route("api/[controller]")]
@@ -68,4 +83,5 @@ namespace GestionDesStagesTB.Server.Controllers
         }
 
     }
+
 }
