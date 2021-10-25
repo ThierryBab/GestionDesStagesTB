@@ -52,5 +52,23 @@ namespace GestionDesStagesTB.Server.Repositories
             _appDbContext.Stage.Remove(foundStage);
             _appDbContext.SaveChanges();
         }
+
+        public Stage UpdateStage(Stage stage)
+        {
+            // Rechercher le stage afin d'indiquer au contexte le stage à mettre à jour
+            var foundStage = _appDbContext.Stage.FirstOrDefault(e => e.StageId == stage.StageId);
+            if (foundStage != null)
+            {
+                foundStage.Titre = stage.Titre;
+                foundStage.Description = stage.Description;
+                foundStage.StageStatutId = stage.StageStatutId;
+                foundStage.DateCreation = stage.DateCreation;
+                foundStage.Salaire = stage.Salaire;
+                foundStage.TypeTravail = stage.TypeTravail;
+                foundStage.Id = stage.Id;
+                _appDbContext.SaveChanges();
+            }
+            return stage;
+        }
     }
 }

@@ -63,6 +63,31 @@ namespace GestionDesStagesTB.Server.Controllers
             return NoContent();//success
         }
 
+        [HttpGet("GetStageByStageId/{StageId}")]
+        public IActionResult GetStageByStageId(string StageId)
+        {
+            return Ok(_stageRepository.GetStageByStageId(StageId));
+        }
+
+        [HttpPut]
+        public IActionResult UpdateStage([FromBody] Stage stage)
+        {
+            if (stage == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // S'assurer que le stage existe dans la table avant de faire la mise à jour
+            var stageToUpdate = _stageRepository.GetStageByStageId(stage.StageId.ToString());
+
+            if (stageToUpdate == null)
+                return NotFound();
+
+            _stageRepository.UpdateStage(stage);
+
+            return NoContent(); //success
+        }
     }
 
     [Route("api/[controller]")]

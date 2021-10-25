@@ -64,5 +64,27 @@ namespace GestionDesStagesTB.Client.Services
             await _httpClient.DeleteAsync($"api/stage/{StageId}");
         }
 
+        public async Task<Stage> GetStageByStageId(string StageId)
+        {
+            try
+            {
+                return await JsonSerializer.DeserializeAsync<Stage>
+                    (await _httpClient.GetStreamAsync($"api/stage/GetStageByStageId/{StageId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erreur dans l'obtention de données d'un enregistrement {ex}");
+            }
+            return null;
+        }
+
+        public async Task UpdateStage(Stage stage)
+        {
+            var stageJson =
+                new StringContent(JsonSerializer.Serialize(stage), Encoding.UTF8, "application/json");
+
+            await _httpClient.PutAsync("api/stage", stageJson);
+        }
+
     }
 }

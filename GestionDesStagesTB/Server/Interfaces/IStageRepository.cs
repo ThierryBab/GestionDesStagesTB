@@ -18,5 +18,7 @@ namespace GestionDesStagesTB.Server.Interfaces
         Stage GetStageByStageId(string StageId);
 
         void DeleteStage(Guid StageId);
+
+        Stage UpdateStage(Stage stage);
     }
 }
