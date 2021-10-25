@@ -10,7 +10,7 @@ namespace GestionDesStagesTB.Client.Interfaces
     {
         Task<Stage> AddStage(Stage stage);
 
-        Task<IEnumerable<Stage>> GetAllStages();
+        Task<IEnumerable<Stage>> GetAllStages(string id = null);
     }
 
 }
