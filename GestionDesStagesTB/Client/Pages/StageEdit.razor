@@ -1,4 +1,5 @@
 ﻿@page "/stageedit"
+@page "/stageedit/{StageId}"
 @attribute [Authorize(Policy = @GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise)]
 @using GestionDesStagesTB.Shared.Models;
 
@@ -13,6 +14,24 @@
             <input @bind-Value:event="oninput" id="Titre" class="form-control col-sm-8" @bind-Value="@Stage.Titre" placeholder="Entrer le titre du stage" />
             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.Titre)" />
         </div>
+        <div class="form-group row">
+            <label asp-for="Nom" class="col-sm-3">Nom de l'employeur:</label>
+            <input @bind-Value:event="oninput" id="Nom" class="form-control col-sm-8" @bind-Value="@Stage.Nom" placeholder="Entrer le nom de l'employeur" />
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.Nom)" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="nomEntreprise" class="col-sm-3">Nom de l'entreprise:</label>
+            <input @bind-Value:event="oninput" id="nomEntreprise" class="form-control col-sm-8" @bind-Value="@Stage.nomEntreprise" placeholder="Entrer le nom de l'entreprise" />
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.nomEntreprise)" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Email" class="col-sm-3">Email:</label>
+            <input @bind-Value:event="oninput" id="Email" class="form-control col-sm-8" @bind-Value="@Stage.Email" placeholder="Email" />
+            <ValidationMessage asp-validation-for="Input.Email" class="offset-sm-3 col-sm-8" For="@(() => Stage.Email)" />
+        </div>
+
 
         <div class="form-group row">
             <label asp-for="Description" class="col-sm-3">Description sommaire du stage:</label>
@@ -20,7 +39,7 @@
             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Stage.Description)" />
         </div>
 
-        @*<div class="form-group row">
+        <div class="form-group row">
             <label for="Statut" class="col-sm-3">Statut: </label>
             <InputSelect id="Statut" class="form-control col-sm-8" @bind-Value="@Stage.StageStatutId">
                 @foreach (var statut in StageStatut)
@@ -28,7 +47,7 @@
                     <option value="@statut.StageStatutId">@statut.DescriptionStatut</option>
                 }
             </InputSelect>
-        </div>*@
+        </div>
 
         <div class="form-group row">
             <label for="Salaire" class=" offset-sm-3">
@@ -55,7 +74,7 @@
             <label for="DateCreation" class="col-sm-3">Création: </label>
             <InputDate id="DateCreation" class="form-control col-sm-8" @bind-Value="@Stage.DateCreation" placeholder="Entrer la date création"></InputDate>
         </div>
-        <button type="submit" class="btn btn-primary edit-btn">Ajouter le stage</button>
+        <button type="submit" class="btn btn-primary edit-btn">@LibelleBoutonEnregistrer</button>
         <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Annuler</a>
     </EditForm>
 

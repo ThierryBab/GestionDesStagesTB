@@ -2,7 +2,7 @@
 
 namespace GestionDesStagesTB.Server.Data.Migrations
 {
-    public partial class ajoutid2 : Migration
+    public partial class changenom : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,0 +1,63 @@
+﻿@page "/stageview"
+@attribute [Authorize(Roles = "Etudiant,Entreprise")]
+
+<h1>Tableau des offres de stage</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Statut</th>
+            <th>Email</th>
+            <th>Nom</th>
+            <th>Nom de l'entreprise</th>
+            <th>Création</th>
+            <AuthorizeView Policy="@GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise">
+                <Authorized>
+                    <th></th>
+                </Authorized>
+            </AuthorizeView>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var stage in Stages)
+        {
+        <tr>
+            <AuthorizeView>
+                <Authorized>
+                    @if (context.User.IsInRole("Entreprise"))
+                    {
+                        <td>
+                            <a style="font-style:italic;text-decoration:underline" href="@($"stageedit/{stage.StageId}")">
+                                @stage.Titre
+                            </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>@stage.Titre</td>
+                    }
+                </Authorized>
+            </AuthorizeView>
+            <td>@stage.Description</td>
+            <td>@stage.StageStatut?.DescriptionStatut</td>
+            <td>@stage.Email</td>
+            <td>@stage.Nom</td>
+            <td>@stage.nomEntreprise</td>
+            <td>@stage.DateCreation.ToString("yyyy-MM-dd")</td>
+            <AuthorizeView Policy="@GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise">
+                <Authorized>
+                    <td>
+                        <a class="btn btn-light" @onclick="(() => DeleteStage(stage.StageId))">
+                            Supprimer
+                        </a>
+                    </td>
+                </Authorized>
+            </AuthorizeView>
+        </tr>
+        }
+    </tbody>
+</table>

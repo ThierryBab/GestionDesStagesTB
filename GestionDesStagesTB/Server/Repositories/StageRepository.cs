@@ -1,6 +1,7 @@
 ﻿using GestionDesStagesTB.Server.Data;
 using GestionDesStagesTB.Server.Interfaces;
 using GestionDesStagesTB.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,52 @@ namespace GestionDesStagesTB.Server.Repositories
             var addedEntity = _appDbContext.Stage.Add(stage);
             _appDbContext.SaveChanges();
             return addedEntity.Entity;
+        }
+
+        public IEnumerable<Stage> GetAllStages()
+        {
+            // Obtenir TOUS (n'importe quelle entreprise) les stages actifs
+            //Mode decroissant pour show la liste des stages
+            return _appDbContext.Stage.Where(c => c.StageStatutId == 1).Include(c => c.StageStatut).OrderByDescending(t => t.DateCreation);
+        }
+
+        public IEnumerable<Stage> GetAllStagesById(string id)
+        {
+            // Obtenir seulement les stages d'une entreprise (actif ou non)
+            return _appDbContext.Stage.Include(c => c.StageStatut).Where(c => c.Id == id).OrderByDescending(t => t.DateCreation);
+        }
+
+        public Stage GetStageByStageId(string StageId)
+        {
+            // Obtenir un stage précis d'une entreprise
+            return _appDbContext.Stage.Include(c => c.StageStatut).FirstOrDefault(c => c.StageId == new Guid(StageId));
+        }
+
+        public void DeleteStage(Guid StageId)
+        {
+            var foundStage = _appDbContext.Stage.FirstOrDefault(e => e.StageId == StageId);
+            if (foundStage == null) return;
+
+            _appDbContext.Stage.Remove(foundStage);
+            _appDbContext.SaveChanges();
+        }
+
+        public Stage UpdateStage(Stage stage)
+        {
+            // Rechercher le stage afin d'indiquer au contexte le stage à mettre à jour
+            var foundStage = _appDbContext.Stage.FirstOrDefault(e => e.StageId == stage.StageId);
+            if (foundStage != null)
+            {
+                foundStage.Titre = stage.Titre;
+                foundStage.Description = stage.Description;
+                foundStage.StageStatutId = stage.StageStatutId;
+                foundStage.DateCreation = stage.DateCreation;
+                foundStage.Salaire = stage.Salaire;
+                foundStage.TypeTravail = stage.TypeTravail;
+                foundStage.Id = stage.Id;
+                _appDbContext.SaveChanges();
+            }
+            return stage;
         }
     }
 }

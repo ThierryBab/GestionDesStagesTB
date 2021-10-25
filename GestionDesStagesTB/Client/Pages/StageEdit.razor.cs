@@ -24,9 +24,11 @@ namespace GestionDesStagesTB.Client.Pages
         [Inject]
         public IStageStatutDataService StageStatutDataService { get; set; }
 
+        [Parameter]
+        public string StageId { get; set; }
 
         public Stage Stage { get; set; } = new Stage();
-
+        public string LibelleBoutonEnregistrer { get; set; }
         public List<StageStatut> StageStatut { get; set; } = new List<StageStatut>();
 
         protected override async Task OnInitializedAsync()
@@ -35,8 +37,31 @@ namespace GestionDesStagesTB.Client.Pages
 
             StageStatut = (await StageStatutDataService.GetAllStageStatuts()).ToList();
 
-            // Proposer des valeurs par défaut pour un nouveau stage
-            Stage = new Stage { StageStatutId = 1, Salaire = true, DateCreation = DateTime.Now };
+            if (string.IsNullOrEmpty(StageId))
+            {
+                //add some defaults
+                //Stage = new Stage { StageId = Guid.NewGuid(), DateCreation = DateTime.Now };
+                Stage = new Stage { StageStatutId = 1, Salaire = false, DateCreation = DateTime.Now };
+                LibelleBoutonEnregistrer = "Ajouter ce nouveau stage";
+            }
+            else
+            {
+
+                Stage = (await StageDataService.GetStageByStageId(StageId));
+                LibelleBoutonEnregistrer = "Mettre à jour les informations du stage";
+            }
+
+            if (string.IsNullOrEmpty(StageId))
+            {
+                // Proposer des valeurs par défaut pour un nouveau stage
+                Stage = new Stage { StageStatutId = 1, Salaire = true, DateCreation = DateTime.Now };
+                LibelleBoutonEnregistrer = "Ajouter ce nouveau stage";
+            }
+            else
+            {
+                Stage = (await StageDataService.GetStageByStageId(StageId));
+                LibelleBoutonEnregistrer = "Mettre à jour les informations du stage";
+            }
         }
 
         protected async Task HandleValidSubmit()
@@ -49,12 +74,13 @@ namespace GestionDesStagesTB.Client.Pages
                 Stage.StageId = Guid.NewGuid();
                 // Appel du service pour sauvegarder le nouveau stage dans la base de données.
                 await StageDataService.AddStage(Stage);
+                NavigationManager.NavigateTo("/");
             }
             else
             {
                 // Appel du service pour mettre à jour le stage existant dans la base de données.
-                // Retourner à l'accueil
-                NavigationManager.NavigateTo("/");
+                await StageDataService.UpdateStage(Stage);
+                NavigationManager.NavigateTo("/stageview");
             }
         }
 
@@ -64,7 +90,14 @@ namespace GestionDesStagesTB.Client.Pages
 
         protected void NavigateToOverview()
         {
-            NavigationManager.NavigateTo("/");
+            if (Stage.StageId == Guid.Empty) //new
+            {
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/stageview");
+            }
         }
 
 

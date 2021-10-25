@@ -28,5 +28,15 @@ namespace GestionDesStagesTB.Shared.Policies
                 .RequireRole("Entreprise")
                 .Build();
         }
+
+        public const string EstCoordonateur = "EstCoordonateur";
+        public static AuthorizationPolicy EstCoordonateurPolicy()
+        {
+            return new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                //.RequireClaim("Statut", "Milieu")
+                .RequireRole("Coordonateur")
+                .Build();
+        }
     }
 }

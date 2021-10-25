@@ -39,6 +39,9 @@ namespace GestionDesStagesTB.Client
                 authorizationOptions.AddPolicy(
                     GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise,
                     GestionDesStagesTB.Shared.Policies.Policies.EstEntreprisePolicy());
+                authorizationOptions.AddPolicy(
+                    GestionDesStagesTB.Shared.Policies.Policies.EstCoordonateur,
+                    GestionDesStagesTB.Shared.Policies.Policies.EstCoordonateurPolicy());
             });
 
             //TODO: remplacer le port par une variable qui auto adapte

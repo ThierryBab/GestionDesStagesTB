@@ -98,9 +98,17 @@ namespace GestionDesStagesTB.Server.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
+
                     b.Property<string>("Id")
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Nom")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
 
                     b.Property<bool>("Salaire")
                         .HasColumnType("bit");
@@ -115,6 +123,10 @@ namespace GestionDesStagesTB.Server.Data.Migrations
 
                     b.Property<int>("TypeTravail")
                         .HasColumnType("int");
+
+                    b.Property<string>("nomEntreprise")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
 
                     b.HasKey("StageId");
 

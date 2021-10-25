@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionDesStagesTB.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211003132849_test2")]
-    partial class test2
+    [Migration("20211004033950_AjoutNom,NomEntreprise,Email")]
+    partial class AjoutNomNomEntrepriseEmail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,9 +100,17 @@ namespace GestionDesStagesTB.Server.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
+
                     b.Property<string>("Id")
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Nom")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
 
                     b.Property<bool>("Salaire")
                         .HasColumnType("bit");
@@ -117,6 +125,10 @@ namespace GestionDesStagesTB.Server.Data.Migrations
 
                     b.Property<int>("TypeTravail")
                         .HasColumnType("int");
+
+                    b.Property<string>("nomEntreprise")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
 
                     b.HasKey("StageId");
 
