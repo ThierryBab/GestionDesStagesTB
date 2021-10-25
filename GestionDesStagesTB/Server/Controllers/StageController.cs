@@ -42,6 +42,52 @@ namespace GestionDesStagesTB.Server.Controllers
             return Ok(_stageRepository.GetAllStages());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetAllStage(string id)
+        {
+            return Ok(_stageRepository.GetAllStagesById(id));
+        }
+
+        [HttpDelete("{StageId}")]
+        public IActionResult DeleteStage(Guid StageId)
+        {
+            if (StageId == Guid.Empty)
+                return BadRequest();
+
+            var stageToDelete = (_stageRepository.GetStageByStageId(StageId.ToString()));
+            if (stageToDelete == null)
+                return NotFound();
+
+            _stageRepository.DeleteStage(StageId);
+
+            return NoContent();//success
+        }
+
+        [HttpGet("GetStageByStageId/{StageId}")]
+        public IActionResult GetStageByStageId(string StageId)
+        {
+            return Ok(_stageRepository.GetStageByStageId(StageId));
+        }
+
+        [HttpPut]
+        public IActionResult UpdateStage([FromBody] Stage stage)
+        {
+            if (stage == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // S'assurer que le stage existe dans la table avant de faire la mise à jour
+            var stageToUpdate = _stageRepository.GetStageByStageId(stage.StageId.ToString());
+
+            if (stageToUpdate == null)
+                return NotFound();
+
+            _stageRepository.UpdateStage(stage);
+
+            return NoContent(); //success
+        }
     }
 
     [Route("api/[controller]")]
@@ -60,5 +106,7 @@ namespace GestionDesStagesTB.Server.Controllers
         {
             return Ok(_stageStatutRepository.GetAllStageStatuts());
         }
+
     }
+
 }

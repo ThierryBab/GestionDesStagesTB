@@ -12,5 +12,13 @@ namespace GestionDesStagesTB.Server.Interfaces
         Stage AddStage(Stage stage);
 
         IEnumerable<Stage> GetAllStages();
+
+        IEnumerable<Stage> GetAllStagesById(string id);
+
+        Stage GetStageByStageId(string StageId);
+
+        void DeleteStage(Guid StageId);
+
+        Stage UpdateStage(Stage stage);
     }
 }
