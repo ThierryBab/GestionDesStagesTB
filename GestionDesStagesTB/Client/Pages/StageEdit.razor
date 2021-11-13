@@ -1,4 +1,5 @@
 ﻿@page "/stageedit"
+@page "/stageedit/{StageId}"
 @attribute [Authorize(Policy = @GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise)]
 @using GestionDesStagesTB.Shared.Models;
 
@@ -28,7 +29,7 @@
         <div class="form-group row">
             <label asp-for="Email" class="col-sm-3">Email:</label>
             <input @bind-Value:event="oninput" id="Email" class="form-control col-sm-8" @bind-Value="@Stage.Email" placeholder="Email" />
-            <ValidationMessage asp-validation-for="Input.Email" class="offset-sm-3 col-sm-8"  For="@(() => Stage.Email)" />
+            <ValidationMessage asp-validation-for="Input.Email" class="offset-sm-3 col-sm-8" For="@(() => Stage.Email)" />
         </div>
 
 
@@ -73,7 +74,7 @@
             <label for="DateCreation" class="col-sm-3">Création: </label>
             <InputDate id="DateCreation" class="form-control col-sm-8" @bind-Value="@Stage.DateCreation" placeholder="Entrer la date création"></InputDate>
         </div>
-        <button type="submit" class="btn btn-primary edit-btn">Ajouter le stage</button>
+        <button type="submit" class="btn btn-primary edit-btn">@LibelleBoutonEnregistrer</button>
         <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Annuler</a>
     </EditForm>
 

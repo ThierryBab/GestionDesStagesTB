@@ -2,9 +2,10 @@
 using GestionDesStagesTB.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GestionDesStagesTB.Client.Pages
@@ -16,6 +17,9 @@ namespace GestionDesStagesTB.Client.Pages
 
         [Inject]
         public AuthenticationStateProvider GetAuthenticationStateAsync { get; set; }
+
+        [Inject]
+        public IJSRuntime JsRuntime { get; set; }
 
         public List<Stage> Stages { get; set; } = new List<Stage>();
 
@@ -33,11 +37,7 @@ namespace GestionDesStagesTB.Client.Pages
                 Stages = (await StageDataService.GetAllStages(await ObtenirClaim("sub"))).ToList();
             }
         }
-        /// <summary>
-        /// Pour obtenir un claim : sid (Id de l'utilisateur actuel), sub, auth_time, idp, amr, role, preffered_username, name
-        /// </summary>
-        /// <param name="ClaimName"></param>
-        /// <returns></returns>
+
         private async Task<string> ObtenirClaim(string ClaimName)
         {
             // Obtenir tous les revendications (Claims) de l'utilisateur actuellement connecté.            
@@ -51,6 +51,16 @@ namespace GestionDesStagesTB.Client.Pages
             return user.FindFirst(c => c.Type == ClaimName)?.Value; ;
         }
 
+        protected async Task DeleteStage(Guid stageId)
+        {
+            bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Souhaitez-vous supprimer définitivement cette ligne?");
+            if (confirmed)
+            {
+                await StageDataService.DeleteStage(stageId);
+                // Appel du service pour obtenir la liste des stages d'une entreprise précise
+                Stages = (await StageDataService.GetAllStages(await ObtenirClaim("sub"))).ToList();
+            }
+        }
 
     }
 }
