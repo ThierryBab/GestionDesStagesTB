@@ -23,6 +23,8 @@ namespace GestionDesStagesTB.Server.Data
         public DbSet<Stage> Stage { get; set; }
         public DbSet<StageStatut> StageStatut { get; set; }
 
-        
+        public DbSet<Etudiant> Etudiant { get; set; }
+
+
     }
 }

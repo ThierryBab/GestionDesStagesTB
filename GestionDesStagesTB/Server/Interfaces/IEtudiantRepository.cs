@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace GestionDesStagesTB.Server.Interfaces
 {
-    public interface IStageRepository
+    public interface IEtudiantRepository
     {
+        Etudiant GetEtudiantById(string Id);
 
-        Stage AddStage(Stage stage);
+        Etudiant AddEtudiant(Etudiant etudiant);
 
-        IEnumerable<Stage> GetAllStages();
-        public IEnumerable<Stage> GetAllStagesById(string id);
+        Etudiant UpdateEtudiant(Etudiant etudiant);
     }
 }

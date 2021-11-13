@@ -48,7 +48,8 @@ namespace GestionDesStagesTB.Client
 
             builder.Services.AddHttpClient<IStageDataService, StageDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
             builder.Services.AddHttpClient<IStageStatutDataService, StageStatutDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
-            
+            builder.Services.AddHttpClient<IEtudiantDataService, EtudiantDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
+
             await builder.Build().RunAsync();
         }
     }

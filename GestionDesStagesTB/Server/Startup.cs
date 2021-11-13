@@ -36,6 +36,7 @@ namespace GestionDesStagesTB.Server
 
             services.AddScoped<IStageRepository, StageRepository>();
             services.AddScoped<IStageStatutRepository, StageStatutRepository>();
+            services.AddScoped<IEtudiantRepository, EtudiantRepository>();
 
             services.AddScoped<StageRepository, StageRepository>();
 

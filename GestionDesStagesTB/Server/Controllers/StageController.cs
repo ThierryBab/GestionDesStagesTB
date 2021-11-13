@@ -42,6 +42,12 @@ namespace GestionDesStagesTB.Server.Controllers
             return Ok(_stageRepository.GetAllStages());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetAllStage(string id)
+        {
+            return Ok(_stageRepository.GetAllStagesById(id));
+        }
+
     }
 
     [Route("api/[controller]")]
