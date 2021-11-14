@@ -46,7 +46,6 @@ namespace GestionDesStagesTB.Client.Pages
                 //add some defaults
                 //Stage = new Stage { StageId = Guid.NewGuid(), DateCreation = DateTime.Now };
                 Stage = new Stage { StageStatutId = 1, Salaire = false, DateCreation = DateTime.Now };
-                
                 LibelleBoutonEnregistrer = "Ajouter ce nouveau stage";
             }
             else
@@ -57,17 +56,6 @@ namespace GestionDesStagesTB.Client.Pages
                 LibelleBoutonEnregistrer = "Mettre à jour les informations du stage";
             }
 
-            if (string.IsNullOrEmpty(StageId))
-            {
-                // Proposer des valeurs par défaut pour un nouveau stage
-                Stage = new Stage { StageStatutId = 1, Salaire = true, DateCreation = DateTime.Now };
-                LibelleBoutonEnregistrer = "Ajouter ce nouveau stage";
-            }
-            else
-            {
-                Stage = (await StageDataService.GetStageByStageId(StageId));
-                LibelleBoutonEnregistrer = "Mettre à jour les informations du stage";
-            }
         }
 
         protected async Task HandleValidSubmit()

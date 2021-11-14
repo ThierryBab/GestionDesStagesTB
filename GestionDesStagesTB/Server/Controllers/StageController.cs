@@ -1,5 +1,6 @@
 ﻿using GestionDesStagesTB.Server.Interfaces;
 using GestionDesStagesTB.Shared.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace GestionDesStagesTB.Server.Controllers
 {
+    [Authorize(Roles = "Entreprise,Etudiant")]
     [Route("api/[controller]")]
     [ApiController]
     public class StageController : ControllerBase
@@ -109,29 +111,7 @@ namespace GestionDesStagesTB.Server.Controllers
             // Le candidat semble avoir déjà postulé
             return BadRequest();
         }
-
-    }
-
-    [Route("api/[controller]")]
-    [ApiController]
-    public class StageStatutController : Controller
-    {
-        private readonly IStageStatutRepository _stageStatutRepository;
-        private readonly IStageRepository _stageRepository;
-
-        public StageStatutController(IStageStatutRepository stageStatutRepository)
-        {
-            _stageStatutRepository = stageStatutRepository;
-        }
-
-        [HttpGet]
-        public IActionResult GetAllStageStatuts()
-        {
-            return Ok(_stageStatutRepository.GetAllStageStatuts());
-        }
-
         [HttpGet("GetCandidaturesStageByStageId/{StageId}")]
-        //[HttpGet("{StageId}")]
         public IActionResult GetCandidaturesStageByStageId(string StageId)
         {
             return Ok(_stageRepository.GetCandidaturesStageByStageId(StageId));

@@ -102,12 +102,13 @@ namespace GestionDesStagesTB.Client.Services
 
             return null;
         }
+
         public async Task<IEnumerable<PostulerStage>> GetCandidaturesStageByStageId(string StageId)
         {
             try
             {
                 return await JsonSerializer.DeserializeAsync<IEnumerable<PostulerStage>>
-                    (await _httpClient.GetStreamAsync($"api/stage/GetCandidaturesStageByStageId/{StageId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                (await _httpClient.GetStreamAsync($"api/stage/GetCandidaturesStageByStageId/{StageId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
             catch (Exception ex)
             {
