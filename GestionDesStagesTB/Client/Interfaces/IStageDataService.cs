@@ -14,6 +14,7 @@ namespace GestionDesStagesTB.Client.Interfaces
         Task DeleteStage(Guid stageId);
         Task<Stage> GetStageByStageId(string stageId);
         Task UpdateStage(Stage stage);
+        Task<PostulerStage> PostulerStage(PostulerStage postulerStage);
     }
 
 }

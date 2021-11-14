@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,9 @@ namespace GestionDesStagesTB.Shared.Models
         // Garder le lien entre l'utilisateur entrepreneur et le stage
         [StringLength(450)]
         public string Id { get; set; }
+
+        [ForeignKey("Id")]
+        public Entreprise Entreprise { get; set; }
 
         [StringLength(45)]
         public string Nom { get; set; }

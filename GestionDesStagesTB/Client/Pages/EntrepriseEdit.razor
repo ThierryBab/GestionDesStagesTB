@@ -1,0 +1,60 @@
+﻿@page "/entrepriseedit"
+@using GestionDesStagesTB.Shared.Models;
+@attribute [Authorize(Policy = @GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise)]
+@using Microsoft.AspNetCore.Authorization
+<section>
+    <AuthorizeView>
+        <Authorized>
+            <h3 style="background-color: black; color: white; padding: 5px 5px 5px 5px;" class="page-title">Détail des informations de votre profil | @context.User.Identity.Name</h3>
+        </Authorized>
+    </AuthorizeView>
+    <p class="text-muted" style="font-style:italic">Prenez note que votre courriel et votre mot de passe peuvent être modifiés en cliquant en haut à droite.</p>
+    <EditForm Model="@Entreprise" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary></ValidationSummary>
+
+        <div class="form-group row">
+            <label asp-for="NomEntreprise" class="col-sm-3">Nom de l'entreprise :</label>
+            <InputText id="NomEntreprise" class="form-control col-sm-8" @bind-Value="@Entreprise.NomEntreprise" placeholder="Entrer votre le nom de l'entreprise"></InputText>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Entreprise.NomEntreprise)" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="NomResponsable" class="col-sm-3">Votre NomResponsable :</label>
+            <InputText id="NomResponsable" class="form-control col-sm-8" @bind-Value="@Entreprise.NomResponsable" placeholder="Entrer votre NomResponsable"></InputText>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Entreprise.NomResponsable)" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="PrenomResponsable" class="col-sm-3">Votre PrenomResponsable :</label>
+            <InputText id="PrenomResponsable" class="form-control col-sm-8" @bind-Value="@Entreprise.PrenomResponsable" placeholder="Entrer votre PrenomResponsable"></InputText>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Entreprise.PrenomResponsable)" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Telephone" class="col-sm-3">Votre téléphone :</label>
+            <InputText id="Telephone" class="form-control col-sm-8" @bind-Value="@Entreprise.Telephone" placeholder="Entrer votre numéro de téléphone"></InputText>
+            <label class="offset-sm-3 col-sm-8 text-muted">Merci de saisir avec le format suivant : 9999999999)</label>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Entreprise.Telephone)" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="PosteTelephonique" class="col-sm-3">Votre PosteTelephonique :</label>
+            <InputText id="PosteTelephonique" class="form-control col-sm-8" @bind-Value="@Entreprise.PosteTelephonique" placeholder="Entrer votre numéro de PosteTelephonique"></InputText>
+            <label class="offset-sm-3 col-sm-8 text-muted">Merci de saisir avec le format suivant : 9999999999)</label>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Entreprise.PosteTelephonique)" />
+        </div>
+
+        <div class="form-group row">
+            <label for="DateCreation" class="col-sm-3">Création: </label>
+            <InputDate id="DateCreation" class="form-control col-sm-8" @bind-Value="@Entreprise.DateCreation" placeholder="Entrer la date création"></InputDate>
+        </div>
+
+        <div class="form-group row">
+            <label for="DateCreation" class="col-sm-3">Modification: </label>
+            <InputDate id="DateModification" class="form-control col-sm-8" @bind-Value="@Entreprise.DateModification" placeholder="Entrer la DateModification"></InputDate>
+        </div>
+
+        <button type="submit" class="btn btn-primary edit-btn">Enregistrer les informations</button>
+        <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Annuler</a>
+    </EditForm>
+</section>

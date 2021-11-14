@@ -38,7 +38,11 @@
                     }
                     else
                     {
-                        <td>@stage.Titre</td>
+                <td>
+                    <a style="font-style:italic;text-decoration:underline" href="@($"stagedetail/{stage.StageId}")">
+                        @stage.Titre
+                    </a>
+                </td>
                     }
                 </Authorized>
             </AuthorizeView>

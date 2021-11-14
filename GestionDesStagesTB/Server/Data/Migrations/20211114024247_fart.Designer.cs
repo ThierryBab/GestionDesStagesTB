@@ -4,14 +4,16 @@ using GestionDesStagesTB.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestionDesStagesTB.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211114024247_fart")]
+    partial class fart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,44 +86,6 @@ namespace GestionDesStagesTB.Server.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("GestionDesStagesTB.Shared.Models.Entreprise", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateCreation")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateModification")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NomEntreprise")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("NomResponsable")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PosteTelephonique")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("PrenomResponsable")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Telephone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Entreprise");
-                });
-
             modelBuilder.Entity("GestionDesStagesTB.Shared.Models.Etudiant", b =>
                 {
                     b.Property<string>("Id")
@@ -145,32 +109,6 @@ namespace GestionDesStagesTB.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Etudiant");
-                });
-
-            modelBuilder.Entity("GestionDesStagesTB.Shared.Models.PostulerStage", b =>
-                {
-                    b.Property<int>("PostulerStageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DatePostule")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Id")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("StageId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PostulerStageId");
-
-                    b.HasIndex("Id");
-
-                    b.HasIndex("StageId");
-
-                    b.ToTable("PostulerStage");
                 });
 
             modelBuilder.Entity("GestionDesStagesTB.Shared.Models.Stage", b =>
@@ -218,8 +156,6 @@ namespace GestionDesStagesTB.Server.Data.Migrations
                         .HasColumnType("nvarchar(45)");
 
                     b.HasKey("StageId");
-
-                    b.HasIndex("Id");
 
                     b.HasIndex("StageStatutId");
 
@@ -480,36 +416,13 @@ namespace GestionDesStagesTB.Server.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GestionDesStagesTB.Shared.Models.PostulerStage", b =>
-                {
-                    b.HasOne("GestionDesStagesTB.Shared.Models.Etudiant", "Etudiant")
-                        .WithMany()
-                        .HasForeignKey("Id");
-
-                    b.HasOne("GestionDesStagesTB.Shared.Models.Stage", "Stage")
-                        .WithMany()
-                        .HasForeignKey("StageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Etudiant");
-
-                    b.Navigation("Stage");
-                });
-
             modelBuilder.Entity("GestionDesStagesTB.Shared.Models.Stage", b =>
                 {
-                    b.HasOne("GestionDesStagesTB.Shared.Models.Entreprise", "Entreprise")
-                        .WithMany()
-                        .HasForeignKey("Id");
-
                     b.HasOne("GestionDesStagesTB.Shared.Models.StageStatut", "StageStatut")
                         .WithMany()
                         .HasForeignKey("StageStatutId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Entreprise");
 
                     b.Navigation("StageStatut");
                 });

@@ -1,0 +1,59 @@
+﻿@page "/stagedetail/{StageId}"
+@attribute [Authorize(Policy = @GestionDesStagesTB.Shared.Policies.Policies.EstEtudiant)]
+
+<section>
+    <h1 class="page-title">@Stage.Titre</h1>
+
+    <div class="col-10 row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" style="text-align:right">Description :</label>
+                <div class="col-sm-8" style="border-bottom : 1px solid gray">
+                    <label type="text" class="form-control-plaintext">@Stage.Description</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" style="text-align:right">Salaire :</label>
+                <div class="col-sm-8" style="border-bottom : 1px solid gray">
+                    <label type="text" readonly class="form-control-plaintext">@(Stage.Salaire?"Payant!":"Non")</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" style="text-align:right">Statut :</label>
+                <div class="col-sm-8" style="border-bottom : 1px solid gray">
+                    <label type="text" readonly class="form-control-plaintext">@Stage.TypeTravail</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" style="text-align:right">Entreprise : </label>
+                <div class="col-sm-8" style="border-bottom : 1px solid gray">
+                    <label type="text" readonly class="form-control-plaintext">@Stage.Entreprise?.NomEntreprise</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" style="text-align:right">Responsable :</label>
+                <div class="col-sm-8" style="border-bottom : 1px solid gray">
+                    <label type="text" readonly class="form-control-plaintext">@Stage.Entreprise?.PrenomResponsable @Stage.Entreprise?.NomResponsable</label>
+                    <label type="text" readonly class="form-control-plaintext">@String.Format("{0:(###) ###-####}", Convert.ToInt64(Stage.Entreprise?.Telephone)) x :@Stage.Entreprise?.PosteTelephonique</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <!-- Si le profil de l'étudiant n'existe pas ne pas afficher le bouton de soumission -->
+                    @if (string.IsNullOrEmpty(EtudiantExiste.Id))
+                    {
+                        <div class="alert alert-primary">
+                            Merci de compléter votre profil pour posutler sur une offre de stage.
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary" @onclick="@Postuler" style="color:white;">
+                            Oui je veux postuler sur cette offre de stage!
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
