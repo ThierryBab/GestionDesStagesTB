@@ -47,7 +47,7 @@ namespace GestionDesStagesTB.Client.Pages
             else
             {
 
-                Stage = (await StageDataService.GetStageByStageId(StageId));
+                Stage = await StageDataService.GetStageByStageId(StageId);
                 LibelleBoutonEnregistrer = "Mettre à jour les informations du stage";
             }
 
