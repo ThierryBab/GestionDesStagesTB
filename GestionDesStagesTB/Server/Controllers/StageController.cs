@@ -117,6 +117,7 @@ namespace GestionDesStagesTB.Server.Controllers
     public class StageStatutController : Controller
     {
         private readonly IStageStatutRepository _stageStatutRepository;
+        private readonly IStageRepository _stageRepository;
 
         public StageStatutController(IStageStatutRepository stageStatutRepository)
         {
@@ -127,6 +128,13 @@ namespace GestionDesStagesTB.Server.Controllers
         public IActionResult GetAllStageStatuts()
         {
             return Ok(_stageStatutRepository.GetAllStageStatuts());
+        }
+
+        [HttpGet("GetCandidaturesStageByStageId/{StageId}")]
+        //[HttpGet("{StageId}")]
+        public IActionResult GetCandidaturesStageByStageId(string StageId)
+        {
+            return Ok(_stageRepository.GetCandidaturesStageByStageId(StageId));
         }
     }
 }

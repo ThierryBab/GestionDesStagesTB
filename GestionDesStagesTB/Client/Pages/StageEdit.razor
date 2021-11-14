@@ -77,6 +77,37 @@
         <button type="submit" class="btn btn-primary edit-btn">@LibelleBoutonEnregistrer</button>
         <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Annuler</a>
     </EditForm>
-
-
 </section>
+<br />
+<h3 style="background-color: black; color: white; padding: 5px 5px 5px 5px;" class="page-title">Candidatures reçues en ordre croissant de date de soumission</h3>
+@if (PostulerStage.Count == 0)
+{
+    <div class="alert alert-primary">
+        Aucune candidature pour le moment.
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom étudiant</th>
+                <th>Prénom étudiant</th>
+                <th>Telephone</th>
+                <th>Date soumission</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var candidat in PostulerStage)
+            {
+                <tr>
+                    <td>@candidat.Etudiant?.Nom</td>
+                    <td>@candidat.Etudiant?.Prenom</td>
+                    <td>@String.Format("{0:(###) ###-####}", Convert.ToInt64(candidat.Etudiant?.TelephoneCellulaire))</td>
+                    <td>@candidat.DatePostule.ToString("yyyy-MM-dd HH:MM:ss")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

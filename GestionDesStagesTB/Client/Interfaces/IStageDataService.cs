@@ -15,6 +15,7 @@ namespace GestionDesStagesTB.Client.Interfaces
         Task<Stage> GetStageByStageId(string stageId);
         Task UpdateStage(Stage stage);
         Task<PostulerStage> PostulerStage(PostulerStage postulerStage);
+        Task<IEnumerable<PostulerStage>> GetCandidaturesStageByStageId(string StageId);
     }
 
 }

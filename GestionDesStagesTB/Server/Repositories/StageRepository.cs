@@ -105,6 +105,11 @@ namespace GestionDesStagesTB.Server.Repositories
             }
 
         }
+        public IEnumerable<PostulerStage> GetCandidaturesStageByStageId(string StageId)
+        {
+            // Obtenir les enregistrements des candidatures en ordre croissant de date de soumssion
+            return _appDbContext.PostulerStage.Include(c => c.Etudiant).Where(c => c.StageId == new Guid(StageId)).OrderBy(d => d.DatePostule);
+        }
 
     }
 

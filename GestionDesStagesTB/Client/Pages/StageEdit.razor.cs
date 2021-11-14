@@ -28,7 +28,11 @@ namespace GestionDesStagesTB.Client.Pages
         public string StageId { get; set; }
 
         public Stage Stage { get; set; } = new Stage();
+
+        public List<PostulerStage> PostulerStage { get; set; } = new List<PostulerStage>();
+
         public string LibelleBoutonEnregistrer { get; set; }
+
         public List<StageStatut> StageStatut { get; set; } = new List<StageStatut>();
 
         protected override async Task OnInitializedAsync()
@@ -42,12 +46,14 @@ namespace GestionDesStagesTB.Client.Pages
                 //add some defaults
                 //Stage = new Stage { StageId = Guid.NewGuid(), DateCreation = DateTime.Now };
                 Stage = new Stage { StageStatutId = 1, Salaire = false, DateCreation = DateTime.Now };
+                
                 LibelleBoutonEnregistrer = "Ajouter ce nouveau stage";
             }
             else
             {
 
                 Stage = await StageDataService.GetStageByStageId(StageId);
+                PostulerStage = (await StageDataService.GetCandidaturesStageByStageId(StageId)).ToList();
                 LibelleBoutonEnregistrer = "Mettre à jour les informations du stage";
             }
 
