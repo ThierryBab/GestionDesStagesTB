@@ -25,5 +25,6 @@ namespace GestionDesStagesTB.Server.Data
         public DbSet<Etudiant> Etudiant { get; set; }
         public DbSet<PostulerStage> PostulerStage { get; set; }
         public DbSet<Entreprise> Entreprise { get; set; }
+        public DbSet<PieceJointe> PieceJointe { get; set; }
     }
 }

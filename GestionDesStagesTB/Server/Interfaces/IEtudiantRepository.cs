@@ -13,5 +13,9 @@ namespace GestionDesStagesTB.Server.Interfaces
         Etudiant AddEtudiant(Etudiant etudiant);
 
         Etudiant UpdateEtudiant(Etudiant etudiant);
+
+        PieceJointe AddPieceJointe(PieceJointe PieceJointe);
+
+        IEnumerable<PieceJointe> GetAllPiecesJointes(string id);
     }
 }

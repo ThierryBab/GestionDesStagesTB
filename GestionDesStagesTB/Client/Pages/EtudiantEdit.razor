@@ -35,4 +35,44 @@
         <button type="submit" class="btn btn-primary edit-btn">Enregistrer les informations</button>
         <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Annuler</a>
     </EditForm>
+    <br />
+    @if (!string.IsNullOrEmpty(Etudiant.Id))
+    {
+        <h3 style="background-color: black; color: white; padding: 5px 5px 5px 5px;" class="page-title">Pièces jointes</h3>
+        <p>
+            <label>
+                <p class="text-muted" style="font-style:italic">Prenez note que si plus que @maxAllowedFiles fichiers sont sélectionnés simultanément la demande est annulée</p>
+                <InputFile OnChange="@OnInputFileChange" multiple />
+            </label>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fichier</th>
+                    <th>Date versée</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var piecejointe in PiecesJointes)
+                {
+                    <tr>
+                        <td>@piecejointe.FileName</td>
+                        <td>@piecejointe.DateVersee.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            <Button class="btn btn-primary" @onclick='@(async () => await OnClickDownloadButton(piecejointe.StoredFileName))'>
+                                Consulter
+                            </Button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted" style="font-style:italic">
+            Pour charger des pièces jointes vous devez d'abord sauvegarder votre profil et revenir dans cette page.
+        </p>
+    }
 </section>

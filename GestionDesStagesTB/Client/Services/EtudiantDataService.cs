@@ -58,5 +58,34 @@ namespace GestionDesStagesTB.Client.Services
 
             await _httpClient.PutAsync("api/etudiant", stageJson);
         }
+
+        public async Task<PieceJointe> AddPieceJointe(PieceJointe PieceJointe)
+        {
+            var donneesJson =
+                new StringContent(JsonSerializer.Serialize(PieceJointe), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("api/etudiant/addpiecesjointes", donneesJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<PieceJointe>(await response.Content.ReadAsStreamAsync());
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<PieceJointe>> GetAllPiecesJointes(string Id)
+        {
+            try
+            {
+                return await JsonSerializer.DeserializeAsync<IEnumerable<PieceJointe>>
+                    (await _httpClient.GetStreamAsync($"api/etudiant/getallpiecesjointes/{Id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erreur dans l'obtention de données {ex}");
+            }
+            return null;
+        }
     }
 }

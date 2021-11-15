@@ -72,5 +72,26 @@ namespace GestionDesStagesTB.Server.Controllers
 
             return NoContent(); //success
         }
+
+        [HttpPost("addpiecesjointes")]
+        public IActionResult AddPieceJointe([FromBody] PieceJointe PieceJointe)
+        {
+            if (PieceJointe == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var created = _etudiantRepository.AddPieceJointe(PieceJointe);
+
+            return Created("piecejointe", created);
+        }
+
+
+        [HttpGet("getallpiecesjointes/{Id}")]
+        public IActionResult GetAllPiecesJointes(string Id)
+        {
+            return Ok(_etudiantRepository.GetAllPiecesJointes(Id));
+        }
     }
 }

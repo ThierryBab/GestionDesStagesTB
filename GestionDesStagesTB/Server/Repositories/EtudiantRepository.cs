@@ -58,5 +58,26 @@ namespace GestionDesStagesTB.Server.Repositories
             }
             return foundEtudiant;
         }
+
+        public PieceJointe AddPieceJointe(PieceJointe PieceJointe)
+        {
+            try
+            {
+                var addedEntity = _appDbContext.PieceJointe.Add(PieceJointe);
+                _appDbContext.SaveChanges();
+                return addedEntity.Entity;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erreur dans la création d'un enregistrement {ex}");
+                return null;
+            }
+        }
+
+        public IEnumerable<PieceJointe> GetAllPiecesJointes(string id)
+        {
+            // Obtenir TOUS (n'importe quelle entreprise) les stages actifs
+            return _appDbContext.PieceJointe.Where(c => c.Id == id).OrderByDescending(t => t.DateVersee);
+        }
     }
 }

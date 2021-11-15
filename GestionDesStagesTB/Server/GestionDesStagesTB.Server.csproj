@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Identity\NewFolder\**" />
+    <Compile Remove="Migrations\**" />
     <Content Remove="Areas\Identity\NewFolder\**" />
+    <Content Remove="Migrations\**" />
     <EmbeddedResource Remove="Areas\Identity\NewFolder\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <None Remove="Areas\Identity\NewFolder\**" />
+    <None Remove="Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,7 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Folder Include="Development\unsafe_uploads\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

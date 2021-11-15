@@ -10,10 +10,15 @@ namespace GestionDesStagesTB.Client.Interfaces
     {
         Task<Etudiant> GetEtudiantById(string Id);
 
-         Task<Etudiant> AddEtudiant(Etudiant etudiant);
+        Task<Etudiant> AddEtudiant(Etudiant etudiant);
 
         Task UpdateEtudiant(Etudiant etudiant);
 
-        
+        Task<PieceJointe> AddPieceJointe(PieceJointe PieceJointe);
+
+        Task<IEnumerable<PieceJointe>> GetAllPiecesJointes(string Id);
+
+
+
     }
 }
