@@ -1,0 +1,17 @@
+﻿@page "/etudiantdetail/{Id}"
+@attribute [Authorize(Policy = @GestionDesStagesTB.Shared.Policies.Policies.EstEntreprise)]
+
+<section>
+    <h1 class="page-title">@Etudiant.Prenom @Etudiant.Nom @String.Format("{0:(###) ###-####}", Convert.ToInt64(Etudiant.TelephoneCellulaire))</h1>
+    @if (PiecesJointes.Count == 0)
+    {
+        <div class="alert alert-primary">
+            Aucune pièce jointe versée par ce candidat...
+        </div>
+    }
+    else
+    {
+        <PiecesJointes Id="@Etudiant.Id" />
+    }
+    <a class="btn btn-outline-primary" @onclick="@NavigateToStageEdit">Retourner aux informations du stage</a>
+</section>

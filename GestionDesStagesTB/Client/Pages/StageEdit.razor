@@ -101,7 +101,11 @@ else
             @foreach (var candidat in PostulerStage)
             {
                 <tr>
-                    <td>@candidat.Etudiant?.Nom</td>
+                    <td>
+                        <a style="font-style:italic;text-decoration:underline" href="@($"etudiantdetail/{candidat.Etudiant.Id}")">
+                            @candidat.Etudiant?.Nom
+                        </a>
+                    </td>
                     <td>@candidat.Etudiant?.Prenom</td>
                     <td>@String.Format("{0:(###) ###-####}", Convert.ToInt64(candidat.Etudiant?.TelephoneCellulaire))</td>
                     <td>@candidat.DatePostule.ToString("yyyy-MM-dd HH:MM:ss")</td>
@@ -110,4 +114,5 @@ else
         </tbody>
     </table>
 }
+
 

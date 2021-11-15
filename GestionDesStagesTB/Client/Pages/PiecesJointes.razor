@@ -1,0 +1,34 @@
+﻿@page "/piecesjointes"
+<h3 style="background-color: black; color: white; padding: 5px 5px 5px 5px;" class="page-title">Pièces jointes</h3>
+@if (VerserFichier)
+{
+    <p>
+        <label>
+            <p class="text-muted" style="font-style:italic">Prenez note que si plus que @maxAllowedFiles fichiers sont sélectionnés simultanément la demande est annulée</p>
+            <InputFile OnChange="@OnInputFileChange" multiple />
+        </label>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fichier</th>
+            <th>Date versée</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var piecejointe in PiecesJtes)
+        {
+            <tr>
+                <td>@piecejointe.FileName</td>
+                <td>@piecejointe.DateVersee.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <Button class="btn btn-primary" @onclick='@(async () => await OnClickDownloadButton(piecejointe.StoredFileName))'>
+                        Consulter
+                    </Button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

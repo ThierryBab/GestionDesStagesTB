@@ -2,6 +2,7 @@
 @using GestionDesStagesTB.Shared.Models;
 @attribute [Authorize(Policy = @GestionDesStagesTB.Shared.Policies.Policies.EstEtudiant)]
 @using Microsoft.AspNetCore.Authorization
+@using GestionDesStagesTB.Client.Pages;
 <section>
     <AuthorizeView>
         <Authorized>
@@ -38,36 +39,7 @@
     <br />
     @if (!string.IsNullOrEmpty(Etudiant.Id))
     {
-        <h3 style="background-color: black; color: white; padding: 5px 5px 5px 5px;" class="page-title">Pièces jointes</h3>
-        <p>
-            <label>
-                <p class="text-muted" style="font-style:italic">Prenez note que si plus que @maxAllowedFiles fichiers sont sélectionnés simultanément la demande est annulée</p>
-                <InputFile OnChange="@OnInputFileChange" multiple />
-            </label>
-        </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Fichier</th>
-                    <th>Date versée</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var piecejointe in PiecesJointes)
-                {
-                    <tr>
-                        <td>@piecejointe.FileName</td>
-                        <td>@piecejointe.DateVersee.ToString("yyyy-MM-dd")</td>
-                        <td>
-                            <Button class="btn btn-primary" @onclick='@(async () => await OnClickDownloadButton(piecejointe.StoredFileName))'>
-                                Consulter
-                            </Button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <PiecesJointes Id="@Etudiant.Id" VerserFichier=true />
     }
     else
     {
