@@ -23,9 +23,17 @@ namespace GestionDesStagesTB.Server.Repositories
 
         public Stage AddStage(Stage stage)
         {
-            var addedEntity = _appDbContext.Stage.Add(stage);
-            _appDbContext.SaveChanges();
-            return addedEntity.Entity;
+            try
+            {
+                var addedEntity = _appDbContext.Stage.Add(stage);
+                _appDbContext.SaveChanges();
+                return addedEntity.Entity;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erreur dans la création d'un enregistrement {ex}");
+                return null;
+            }
         }
 
         public IEnumerable<Stage> GetAllStages()

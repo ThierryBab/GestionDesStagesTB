@@ -22,10 +22,15 @@ namespace GestionDesStagesTB.Client.Pages
         public IStageDataService StageDataService { get; set; }
 
         [Inject]
+        public IEntrepriseDataService EntrepriseDataService { get; set; }
+
+        [Inject]
         public IStageStatutDataService StageStatutDataService { get; set; }
 
         [Parameter]
         public string StageId { get; set; }
+
+        public Entreprise EntrepriseExiste { get; set; } = new Entreprise();
 
         public Stage Stage { get; set; } = new Stage();
 
@@ -37,6 +42,9 @@ namespace GestionDesStagesTB.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            // Tenter d'obtenir les informations du profil de l'entreprise actuellement connecté
+            EntrepriseExiste = await EntrepriseDataService.GetEntrepriseById(await ObtenirClaim("sub"));
+
             // Appel du service pour obtenir la liste des status de stage
 
             StageStatut = (await StageStatutDataService.GetAllStageStatuts()).ToList();

@@ -8,6 +8,8 @@
     <EditForm Model="@Stage" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary></ValidationSummary>
+
+
         <div class="form-group row">
             <label asp-for="Titre" class="col-sm-3">Titre du stage:</label>
             @*<InputText id="Titre" class="form-control col-sm-8"  @bind-Value="@Stage.Titre" placeholder="Entrer le titre du stage"></InputText>*@
@@ -74,8 +76,19 @@
             <label for="DateCreation" class="col-sm-3">Création: </label>
             <InputDate id="DateCreation" class="form-control col-sm-8" @bind-Value="@Stage.DateCreation" placeholder="Entrer la date création"></InputDate>
         </div>
-        <button type="submit" class="btn btn-primary edit-btn">@LibelleBoutonEnregistrer</button>
-        <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Annuler</a>
+        <!-- Si le profil de l'entreprise n'existe pas ne pas afficher le bouton de soumission -->
+        @if (string.IsNullOrEmpty(EntrepriseExiste.Id))
+        {
+            <div class="alert alert-primary">
+                Merci de compléter votre profil pour ajouter une offre de stage.
+            </div>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary edit-btn">@LibelleBoutonEnregistrer</button>
+            <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Annuler</a>
+        }
+
     </EditForm>
 </section>
 <br />
