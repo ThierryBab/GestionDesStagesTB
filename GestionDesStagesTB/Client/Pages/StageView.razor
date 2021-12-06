@@ -3,7 +3,14 @@
 
 <h1>Tableau des offres de stage</h1>
 
-
+<EditForm Model="@Rechercher">
+    <div class="form-group row">
+        <InputText id="Rechercher" class="form-control col-sm-8" @bind-Value="@Rechercher.ValeurRecherchee" placeholder="RECHERCHER ICI.  Entrer une partie du titre du stage ou un mot dans la description du stage"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Rechercher.ValeurRecherchee)" />&nbsp;
+        <button type="submit" class="btn btn-primary" @onclick="@(() => SoumettreRecherche())">Rechercher</button>&nbsp;
+        <button type="submit" class="btn btn-primary" @onclick="@(() => AnnulerRecherche())">Annuler</button>&nbsp;
+    </div>
+</EditForm>
 <table class="table">
     <thead>
         <tr>

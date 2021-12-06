@@ -23,6 +23,7 @@ namespace GestionDesStagesTB.Client.Pages
         public IJSRuntime JsRuntime { get; set; }
 
         public List<Stage> Stages { get; set; } = new List<Stage>();
+        public ZoneRecherche Rechercher { get; set; } = new ZoneRecherche();
 
         protected override async Task OnInitializedAsync()
         {
@@ -61,6 +62,29 @@ namespace GestionDesStagesTB.Client.Pages
                 // Appel du service pour obtenir la liste des stages d'une entreprise précise
                 Stages = (await StageDataService.GetAllStages(await ObtenirClaim("sub"))).ToList();
             }
+        }
+
+        protected async Task SoumettreRecherche()
+        {
+            // S'assurer de la présence d'une valeur à chercher
+            if (!string.IsNullOrEmpty(Rechercher.ValeurRecherchee))
+            {
+                // Appel du service pour obtenir la liste de TOUS les stages actifs et appliquer un filtre pour obtenir les stages selon un mot dans la description ou le titre du stage
+                Stages = (await StageDataService.GetAllStages()).Where(e => e.Description.Contains(Rechercher.ValeurRecherchee.Trim()) || e.Titre.Contains(Rechercher.ValeurRecherchee.Trim())).ToList();
+            }
+            else
+            {
+                //Si aucune valeur afficher toutes les offres de stage sans condition
+                await AnnulerRecherche();
+            }
+        }
+
+        protected async Task AnnulerRecherche()
+        {
+            // Vider la zone de recherche
+            Rechercher.ValeurRecherchee = string.Empty;
+            // Appel du service pour obtenir la liste de TOUS les stages actifs (sans condition)
+            Stages = (await StageDataService.GetAllStages()).ToList();
         }
 
     }
