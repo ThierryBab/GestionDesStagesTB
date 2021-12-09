@@ -44,19 +44,13 @@ namespace GestionDesStagesTB.Client
                     GestionDesStagesTB.Shared.Policies.Policies.EstCoordonateurPolicy());
             });
 
-            //TODO: remplacer le port par une variable qui auto adapte
-
-            //builder.Services.AddHttpClient<IStageDataService, StageDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
-            //builder.Services.AddHttpClient<IStageStatutDataService, StageStatutDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
-            //builder.Services.AddHttpClient<IEtudiantDataService, EtudiantDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
-            //builder.Services.AddHttpClient<IEntrepriseDataService, EntrepriseDataService>(client => client.BaseAddress = new Uri("https://localhost:44359/"));
 
             builder.Services.AddScoped<IStageDataService, StageDataService>();
             builder.Services.AddScoped<IStageStatutDataService, StageStatutDataService>();
-            builder.Services.AddScoped<IEtudiantDataService, EtudiantDataService>();
+            builder.Services.AddScoped<IEtudiantDataService, EtudiantDataService>(); 
+            builder.Services.AddScoped<ICoordonateurDataService, CoordonateurDataService>(); 
             builder.Services.AddScoped<IEntrepriseDataService, EntrepriseDataService>();
-            builder.Services.AddScoped<IFichierDataService, FichierDataService>();
-
+            builder.Services.AddScoped<IFichierDataService, FichierDataService>(); 
             await builder.Build().RunAsync();
         }
     }

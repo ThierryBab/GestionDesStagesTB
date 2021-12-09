@@ -13,14 +13,8 @@ namespace GestionDesStagesTB.Shared.Models
         [StringLength(450)]
         public string Id { get; set; }
 
-        [Required]
-        [StringLength(300)]
-        public string Institution { get; set; }
-
-
         [StringLength(100)]
         public string Nom { get; set; }
-
 
         [StringLength(100)]
         public string Prenom { get; set; }
@@ -29,9 +23,6 @@ namespace GestionDesStagesTB.Shared.Models
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
 
-        [StringLength(10)]
-        public string PosteTelephonique { get; set; }
-
-        public string Remarque { get; set; }
+       
     }
 }
